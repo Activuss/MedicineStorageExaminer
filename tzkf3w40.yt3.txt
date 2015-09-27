@@ -1,0 +1,55 @@
+﻿Revert "Delete all unnecessary files"
+
+This reverts commit 081f0eadc552996171b196d57a14d2d6a70b423c.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch MSE-7
+# Your branch is ahead of 'origin/MSE-7' by 4 commits.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	new file:   .gitignore
+#	new file:   README.md
+#	new file:   data-crawler/.gitignore
+#	new file:   data-crawler/pom.xml
+#	new file:   data-crawler/src/main/.gitignore
+#	new file:   data-crawler/src/main/java/.gitignore
+#	new file:   data-crawler/src/main/java/MedicineDataAnalyzer/.gitignore
+#	new file:   data-crawler/src/main/java/MedicineDataAnalyzer/DataAnalyzer.java
+#	new file:   data-crawler/src/main/java/MedicineDataAnalyzer/DataCrawlerException.java
+#	new file:   data-crawler/src/main/java/MedicineDataAnalyzer/MedicineDataAnalyzer.java
+#	new file:   data-crawler/src/main/java/PDFParser/Line.java
+#	new file:   data-crawler/src/main/java/PDFParser/PDFParser.java
+#	new file:   data-crawler/src/main/java/PDFParser/Page.java
+#	new file:   data-crawler/src/main/java/PDFParser/Pdf2Json.java
+#	new file:   data-crawler/src/main/java/PDFParser/Structure.java
+#	new file:   data-crawler/src/main/java/PDFParser/Word.java
+#	new file:   data-crawler/src/main/java/client/PDFExtractorException.java
+#	new file:   data-crawler/src/main/java/client/PdfExtractor.java
+#	new file:   data-crawler/src/main/java/client/PdfExtractorTestClient.java
+#	new file:   data-crawler/src/main/java/domain/Leftover.java
+#	new file:   data-crawler/src/main/java/domain/Medical.java
+#	new file:   data-crawler/src/main/resources/ananiev_cpsmd.pdf
+#	new file:   data-crawler/src/main/resources/ananiev_crl.pdf
+#	new file:   data-crawler/src/main/resources/arciz_cpsmd.pdf
+#	new file:   data-crawler/src/main/resources/arciz_crl.pdf
+#	new file:   data-crawler/src/main/resources/example.pdf
+#	new file:   data-crawler/target/classes/.gitignore
+#	new file:   data-crawler/target/classes/PDFParser/Line.class
+#	new file:   data-crawler/target/classes/PDFParser/PDFParser.class
+#	new file:   data-crawler/target/classes/PDFParser/Page.class
+#	new file:   data-crawler/target/classes/PDFParser/Pdf2Json.class
+#	new file:   data-crawler/target/classes/PDFParser/Structure.class
+#	new file:   data-crawler/target/classes/PDFParser/Word.class
+#	new file:   data-crawler/target/classes/ananiev_cpsmd.pdf
+#	new file:   data-crawler/target/classes/ananiev_crl.pdf
+#	new file:   data-crawler/target/classes/arciz_cpsmd.pdf
+#	new file:   data-crawler/target/classes/arciz_crl.pdf
+#	new file:   data-crawler/target/classes/client/PdfExtractorTestClient.class
+#	new file:   data-crawler/target/classes/example.pdf
+#	new file:   data-crawler/target/classes/example_words.txt
+#	new file:   pom.xml
+#	new file:   rest-web-app/pom.xml
+#
+
