@@ -1,7 +1,12 @@
 package service;
 
+import java.util.List;
+
 public interface PersistenceService {
-	
-	public void addMedical(String medicalJson);
-	public String getMedical(String location, String medicalName);
+
+	void addMedical(String medicalJson);
+
+	String getMedical(String location, String medicalName);
+
+	List<String> getAllMedical();
 }

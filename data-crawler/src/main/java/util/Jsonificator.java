@@ -6,14 +6,14 @@ import domain.Medical;
 
 public class Jsonificator {
 
-    public static String leftoverToJson(Leftover leftover) {
-        Gson gson = new Gson();
-        return gson.toJson(leftover);
-    }
+	public static String leftoverToJson(Leftover leftover) {
+		Gson gson = new Gson();
+		return gson.toJson(leftover);
+	}
 
-    public static String medicalToJson(Medical medical) {
-        Gson gson = new Gson();
-        return gson.toJson(medical);
-    }
+	public static String medicalToJson(Medical medical) {
+		Gson gson = new Gson();
+		return gson.toJson(medical);
+	}
 
 }

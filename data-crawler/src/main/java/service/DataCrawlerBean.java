@@ -14,55 +14,59 @@ import java.util.List;
 import java.util.Map;
 
 public class DataCrawlerBean implements DataCrawler {
-    private SiteParser parserService;
-    private DataAnalyzer analyzer;
+	private SiteParser parserService;
+	private DataAnalyzer analyzer;
+	private PersistenceService persistenceService;
 
-    public DataCrawlerBean(SiteParser parserService, DataAnalyzer analyzer) {
-        this.parserService = parserService;
-        this.analyzer = analyzer;
-    }
+	public DataCrawlerBean(SiteParser parserService, DataAnalyzer analyzer, PersistenceService persistenceService) {
+		this.parserService = parserService;
+		this.analyzer = analyzer;
+		this.persistenceService = persistenceService;
+	}
 
-    @Override
-    public void startCrawling(String siteUrl) throws DataCrawlerException {
-        List<Medical> clinics = new ArrayList<>();
-        List<String> unParsableLinks = new ArrayList<>();
-        try {
-            Document htmlPage = HtmlPageDownloader.download(siteUrl);
-            Map<Medical, String> medicalPdfLinks = parserService.parse(htmlPage);
+	@Override
+	public void startCrawling(String siteUrl) throws DataCrawlerException {
+		List<Medical> clinics = new ArrayList<>();
+		List<String> unParsableLinks = new ArrayList<>();
+		try {
+			Document htmlPage = HtmlPageDownloader.download(siteUrl);
+			Map<Medical, String> medicalPdfLinks = parserService.parse(htmlPage);
 
-            for (Medical medical : medicalPdfLinks.keySet()) {
-                String pdfUrl = medicalPdfLinks.get(medical);
+			for (Medical medical : medicalPdfLinks.keySet()) {
+				String pdfUrl = medicalPdfLinks.get(medical);
 
-                InputStream fileInputStream = PdfDownloader.downloadAndGetAsStream(pdfUrl);
+				InputStream fileInputStream = PdfDownloader.downloadAndGetAsStream(pdfUrl);
 
-                if (fileInputStream == null) {
-                    continue;
-                }
+				if (fileInputStream == null) {
+					continue;
+				}
 
-                String textFromPDF = TextExtractorFromPdf.extract(fileInputStream);
+				String textFromPDF = TextExtractorFromPdf.extract(fileInputStream);
 
-                Map<String, List<String>> analyzedEntries = analyzer.analyze(textFromPDF);
-                List<String> recognisedAids = analyzedEntries.get(DataAnalyzerBean.RECOGNISED_KEY);
-                List<String> unrecognisedAids = analyzedEntries.get(DataAnalyzerBean.UNRECOGNISED_KEY);
+				Map<String, List<String>> analyzedEntries = analyzer.analyze(textFromPDF);
+				List<String> recognisedAids = analyzedEntries.get(DataAnalyzerBean.RECOGNISED_KEY);
+				List<String> unrecognisedAids = analyzedEntries.get(DataAnalyzerBean.UNRECOGNISED_KEY);
 
-                medical.setUnrecodnisedEntries(unrecognisedAids);
+				medical.setUnrecodnisedEntries(unrecognisedAids);
 
-                if (!recognisedAids.isEmpty()) {
-                    for (String recognised : recognisedAids) {
-                        Leftover leftover = LeftOverBuilder.build(recognised);
-                        medical.getLeftovers().add(leftover);
-                    }
-                } else {
-                    unParsableLinks.add(pdfUrl);
-                }
-                clinics.add(medical);
-                System.out.println(Jsonificator.medicalToJson(medical));
-            }
-        } catch (IOException e) {
-            throw new DataCrawlerException("Some IO error", e);
-        } catch (PDFExtractorException e) {
-            throw new DataCrawlerException("Error during pdf processing", e);
-        }
-    }
+				if (!recognisedAids.isEmpty()) {
+					for (String recognised : recognisedAids) {
+						Leftover leftover = LeftOverBuilder.build(recognised);
+						medical.getLeftovers().add(leftover);
+					}
+				} else {
+					unParsableLinks.add(pdfUrl);
+				}
+				clinics.add(medical);
+				String json = Jsonificator.medicalToJson(medical);
+		        /*persistenceService.addMedical(json);*/
+				System.out.println("Processed: " + json);
+			}
+		} catch (IOException e) {
+			throw new DataCrawlerException("Some IO error", e);
+		} catch (PDFExtractorException e) {
+			throw new DataCrawlerException("Error during pdf processing", e);
+		}
+	}
 
 }

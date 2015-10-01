@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class HtmlPageDownloader {
 
-    public static Document download(String url) throws IOException {
-        return Jsoup.connect(url).get();
-    }
+	public static Document download(String url) throws IOException {
+		return Jsoup.connect(url).get();
+	}
 }

@@ -9,7 +9,7 @@ public class Leftover {
 	private String name;
 	private String measure;
 	private double quantity;
-	
+
 	public Leftover(int localId, String name, String measure, double quantity) {
 		this.localId = localId;
 		this.name = name;

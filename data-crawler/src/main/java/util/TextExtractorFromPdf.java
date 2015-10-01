@@ -16,17 +16,17 @@ import java.io.InputStream;
  */
 public final class TextExtractorFromPdf {
 
-    public static String extract(InputStream inputStream) throws PDFExtractorException {
-        BodyContentHandler handler = new BodyContentHandler();
-        Metadata metadata = new Metadata();
-        ParseContext context = new ParseContext();
-        PDFParser pdfparser = new PDFParser();
-        try {
-            pdfparser.parse(inputStream, handler, metadata, context);
-        } catch (IOException | SAXException | TikaException e) {
-            throw new PDFExtractorException("Can't extract data", e);
-        }
-        return handler.toString();
-    }
+	public static String extract(InputStream inputStream) throws PDFExtractorException {
+		BodyContentHandler handler = new BodyContentHandler();
+		Metadata metadata = new Metadata();
+		ParseContext context = new ParseContext();
+		PDFParser pdfparser = new PDFParser();
+		try {
+			pdfparser.parse(inputStream, handler, metadata, context);
+		} catch (IOException | SAXException | TikaException e) {
+			throw new PDFExtractorException("Can't extract data", e);
+		}
+		return handler.toString();
+	}
 
 }
