@@ -17,8 +17,7 @@ public final class DataAnalyzerBean implements DataAnalyzer {
     public static final String REGEX_PROPER_FIRST_ENTRY_PART = "(\\d+)(.+)(\\s+)";
     public static final String REGEX_PROPER_LAST_ENTRY_PART = "(\\W?)(\\s+)(.*)(\\d+)(\\s*)";
 
-    private final String[] tableHeadRegex = {"(\\s*) (.*) [ ](.*) (.*)",
-            "(\\s*) (.*) [ ](.*) (.*)"};
+    private final String[] tableHeadRegex = {"(\\s*) (.*) [ ](.*) (.*)", "(\\s*) (.*) [ ](.*) (.*)"};
     private final String[] measures = {"амп", "шт", "фл", "табл", "уп", "кг", "пари"};
 
     public  Map<String, List<String>> analyze(String textFromPDF) {
