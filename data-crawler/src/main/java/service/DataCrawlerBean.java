@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import util.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,14 @@ public class DataCrawlerBean implements DataCrawler {
 
             for (Medical medical : medicalPdfLinks.keySet()) {
                 String pdfUrl = medicalPdfLinks.get(medical);
-                String textFromPDF = TextExtractorFromPdf.extract(PdfDownloader.downloadAndGetAsStream(pdfUrl));
+
+                InputStream fileInputStream = PdfDownloader.downloadAndGetAsStream(pdfUrl);
+
+                if (fileInputStream == null) {
+                    continue;
+                }
+
+                String textFromPDF = TextExtractorFromPdf.extract(fileInputStream);
 
                 Map<String, List<String>> analyzedEntries = analyzer.analyze(textFromPDF);
                 List<String> recognisedAids = analyzedEntries.get(DataAnalyzerBean.RECOGNISED_KEY);
